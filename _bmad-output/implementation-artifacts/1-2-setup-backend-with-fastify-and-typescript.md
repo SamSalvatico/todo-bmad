@@ -1,6 +1,6 @@
 # Story 1.2: Setup Backend with Fastify and TypeScript
 
-Status: ready-for-dev
+Status: review
 
 ## Story
 
@@ -33,60 +33,60 @@ So that I have a solid API foundation ready for implementing routes.
 
 ## Tasks / Subtasks
 
-- [ ] Install backend dependencies (AC: backend package setup)
-  - [ ] Add dependencies: `fastify`, `@fastify/cors`, `@fastify/env`, `@fastify/static`, `@fastify/swagger`, `@fastify/swagger-ui`, `better-sqlite3`, `pino`
-  - [ ] Add dev dependencies: `tsx`, `typescript`, `@types/node`, `@types/better-sqlite3`
-  - [ ] Verify versions align with architecture requirements (Fastify v5.x, Node >=24.0.0)
-  - [ ] Run `pnpm install` to install all dependencies
+- [x] Install backend dependencies (AC: backend package setup)
+  - [x] Add dependencies: `fastify`, `@fastify/cors`, `@fastify/env`, `@fastify/static`, `@fastify/swagger`, `@fastify/swagger-ui`, `better-sqlite3`, `pino`
+  - [x] Add dev dependencies: `tsx`, `typescript`, `@types/node`, `@types/better-sqlite3`
+  - [x] Verify versions align with architecture requirements (Fastify v5.x, Node >=24.0.0)
+  - [x] Run `pnpm install` to install all dependencies
 
-- [ ] Configure TypeScript for backend (AC: backend package setup)
-  - [ ] Create `packages/backend/tsconfig.json` extending `../../tsconfig.base.json`
-  - [ ] Configure module resolution: `"moduleResolution": "bundler"`, ESM output
-  - [ ] Set outDir to `dist/`, include `src/**/*`
-  - [ ] Verify TypeScript compiler recognizes configuration
+- [x] Configure TypeScript for backend (AC: backend package setup)
+  - [x] Create `packages/backend/tsconfig.json` extending `../../tsconfig.base.json`
+  - [x] Configure module resolution: `"moduleResolution": "bundler"`, ESM output
+  - [x] Set outDir to `dist/`, include `src/**/*`
+  - [x] Verify TypeScript compiler recognizes configuration
 
-- [ ] Implement environment configuration with validation (AC: backend source structure)
-  - [ ] Create `packages/backend/src/config.ts`
-  - [ ] Define JSON Schema for environment variables: PORT (default 3000), HOST (default 0.0.0.0), NODE_ENV, DB_PATH, CORS_ORIGIN
-  - [ ] Export typed config interface matching schema
-  - [ ] Use `@fastify/env` to load and validate environment variables
-  - [ ] Implement fail-fast behavior on missing required config
+- [x] Implement environment configuration with validation (AC: backend source structure)
+  - [x] Create `packages/backend/src/config.ts`
+  - [x] Define JSON Schema for environment variables: PORT (default 3000), HOST (default 0.0.0.0), NODE_ENV, DB_PATH, CORS_ORIGIN
+  - [x] Export typed config interface matching schema
+  - [x] Use `@fastify/env` to load and validate environment variables
+  - [x] Implement fail-fast behavior on missing required config
 
-- [ ] Setup SQLite database initialization (AC: backend source structure)
-  - [ ] Create `packages/backend/src/db/init.sql` with `CREATE TABLE IF NOT EXISTS todos`
-  - [ ] Schema: `id INTEGER PRIMARY KEY AUTOINCREMENT`, `text TEXT NOT NULL`, `completed INTEGER DEFAULT 0`, `created_at TEXT DEFAULT CURRENT_TIMESTAMP`
-  - [ ] Create `packages/backend/src/db/database.ts` to initialize better-sqlite3 connection
-  - [ ] Load and execute `init.sql` on database initialization
-  - [ ] Export database instance for use by repositories
+- [x] Setup SQLite database initialization (AC: backend source structure)
+  - [x] Create `packages/backend/src/db/init.sql` with `CREATE TABLE IF NOT EXISTS todos`
+  - [x] Schema: `id INTEGER PRIMARY KEY AUTOINCREMENT`, `text TEXT NOT NULL`, `completed INTEGER DEFAULT 0`, `created_at TEXT DEFAULT CURRENT_TIMESTAMP`
+  - [x] Create `packages/backend/src/db/database.ts` to initialize better-sqlite3 connection
+  - [x] Load and execute `init.sql` on database initialization
+  - [x] Export database instance for use by repositories
 
-- [ ] Implement Fastify app factory (AC: backend source structure)
-  - [ ] Create `packages/backend/src/app.ts` exporting `createApp()` factory function
-  - [ ] Register `@fastify/env` plugin with config schema
-  - [ ] Register `@fastify/cors` with CORS_ORIGIN from config
-  - [ ] Register `@fastify/swagger` with API metadata
-  - [ ] Register `@fastify/swagger-ui` at `/docs` endpoint
-  - [ ] Configure Pino logging based on NODE_ENV
-  - [ ] DO NOT call app.listen() in app.ts (separation of concerns)
+- [x] Implement Fastify app factory (AC: backend source structure)
+  - [x] Create `packages/backend/src/app.ts` exporting `createApp()` factory function
+  - [x] Register `@fastify/env` plugin with config schema
+  - [x] Register `@fastify/cors` with CORS_ORIGIN from config
+  - [x] Register `@fastify/swagger` with API metadata
+  - [x] Register `@fastify/swagger-ui` at `/docs` endpoint
+  - [x] Configure Pino logging based on NODE_ENV
+  - [x] DO NOT call app.listen() in app.ts (separation of concerns)
 
-- [ ] Create server entry point (AC: backend source structure)
-  - [ ] Create `packages/backend/src/server.ts` as application entry point
-  - [ ] Import and call `createApp()` from app.ts
-  - [ ] Call `app.listen()` with PORT and HOST from config
-  - [ ] Log startup message with server URL
-  - [ ] Handle graceful shutdown on SIGTERM/SIGINT
+- [x] Create server entry point (AC: backend source structure)
+  - [x] Create `packages/backend/src/server.ts` as application entry point
+  - [x] Import and call `createApp()` from app.ts
+  - [x] Call `app.listen()` with PORT and HOST from config
+  - [x] Log startup message with server URL
+  - [x] Handle graceful shutdown on SIGTERM/SIGINT
 
-- [ ] Add development script to backend package (AC: backend running)
-  - [ ] Add `"dev": "tsx watch src/server.ts"` to `packages/backend/package.json` scripts
-  - [ ] Add `"build": "tsc"` to package.json scripts
-  - [ ] Add `"start": "node dist/server.js"` for production
+- [x] Add development script to backend package (AC: backend running)
+  - [x] Add `"dev": "tsx watch src/server.ts"` to `packages/backend/package.json` scripts
+  - [x] Add `"build": "tsc"` to package.json scripts
+  - [x] Add `"start": "node dist/server.js"` for production
 
-- [ ] Verify backend functionality (AC: backend running)
-  - [ ] Run `pnpm --filter backend dev` from project root
-  - [ ] Verify server starts without errors on configured port
-  - [ ] Verify SQLite database file created at DB_PATH location
-  - [ ] Verify Swagger UI accessible at `http://localhost:3000/docs`
-  - [ ] Verify Pino logs show startup messages in console
-  - [ ] Test hot reload with tsx watch by editing server.ts
+- [x] Verify backend functionality (AC: backend running)
+  - [x] Run `pnpm --filter backend dev` from project root
+  - [x] Verify server starts without errors on configured port
+  - [x] Verify SQLite database file created at DB_PATH location
+  - [x] Verify Swagger UI accessible at `http://localhost:3000/docs`
+  - [x] Verify Pino logs show startup messages in console
+  - [x] Test hot reload with tsx watch by editing server.ts
 
 ## Dev Notes
 
@@ -348,7 +348,7 @@ Reference: [Architecture.md#Enforcement Guidelines](../../_bmad-output/planning-
 
 ### Agent Model Used
 
-_To be filled by dev agent during implementation_
+Claude Sonnet 4.5
 
 ### Debug Log References
 
@@ -356,18 +356,79 @@ _To be filled by dev agent during implementation_
 
 ### Completion Notes List
 
-_To be filled by dev agent during implementation_
+**Implementation Summary:**
+
+✅ **Backend Foundation Complete** - Fastify v5.2.0 backend fully configured with TypeScript strict mode and production-ready architecture
+
+**Key Accomplishments:**
+
+1. **Dependencies & Configuration**
+   - Installed Fastify 5.2.0 with all required plugins (@fastify/cors, @fastify/env, @fastify/static, @fastify/swagger, @fastify/swagger-ui)
+   - Configured better-sqlite3 11.8.1 with native bindings (required pnpm rebuild)
+   - Added pnpm configuration to enable build scripts: `"onlyBuiltDependencies": ["better-sqlite3"]`
+   - TypeScript configuration extends base config with strict mode enabled
+
+2. **Environment Validation**
+   - Implemented JSON Schema-based environment validation using @fastify/env
+   - Config validates on startup with fail-fast behavior
+   - All required variables have sensible defaults (PORT: 3000, HOST: 0.0.0.0, etc.)
+   - Type-safe config interface matches schema
+
+3. **Database Initialization**
+   - SQLite database auto-creates at `./data/todos.db` (relative to backend package)
+   - Schema matches requirements exactly: id (INTEGER PK AUTOINCREMENT), text (TEXT NOT NULL), completed (INTEGER DEFAULT 0), created_at (TEXT DEFAULT CURRENT_TIMESTAMP)
+   - Idempotent initialization using `CREATE TABLE IF NOT EXISTS`
+   - Added directory creation logic to handle missing parent directories
+
+4. **App Architecture**
+   - Clean separation: app.ts (factory) vs server.ts (entry point)
+   - app.ts registers all plugins but DOES NOT call listen() - fully testable
+   - server.ts handles startup and graceful shutdown (SIGTERM/SIGINT)
+   - Health check endpoint at `/health` for monitoring
+
+5. **Logging & Documentation**
+   - Pino (Fastify built-in) configured with level based on NODE_ENV
+   - Swagger UI accessible at `/docs` with OpenAPI spec
+   - Clean JSON-formatted logs for production observability
+
+6. **Development Experience**
+   - Hot reload working via tsx watch - detects changes and restarts automatically
+   - Scripts configured: `dev` (tsx watch), `build` (tsc), `start` (node dist/)
+   - Server verified running on port 3000 with all endpoints functional
+
+**Technical Decisions:**
+
+- Used synchronous better-sqlite3 API (fast, zero-config, matches architecture)
+- Database path resolves relative to backend package working directory
+- CORS configured for Vite dev server (http://localhost:5173)
+- ESM modules throughout with `"type": "module"` in package.json
+- No tests in this story (testing infrastructure comes in Story 1.5 per architecture)
+
+**Verification Results:**
+
+- ✅ Server starts without errors
+- ✅ Swagger UI accessible and rendering
+- ✅ Database file created with correct schema
+- ✅ Pino logs showing in JSON format
+- ✅ Hot reload functioning (tsx watch)
+- ✅ Health endpoint responding: `{"status":"ok","timestamp":"..."}`
+
+All acceptance criteria satisfied. Backend foundation ready for route implementation in Story 2.2.
 
 ### File List
 
-**To be created:**
+**Created:**
 - packages/backend/tsconfig.json
 - packages/backend/src/config.ts
 - packages/backend/src/app.ts
 - packages/backend/src/server.ts
 - packages/backend/src/db/database.ts
 - packages/backend/src/db/init.sql
+- packages/backend/data/todos.db (SQLite database file)
+- .env (copied from .env.example)
 
-**To be modified:**
-- packages/backend/package.json (add dependencies + scripts)
-- _bmad-output/implementation-artifacts/sprint-status.yaml (update story status)
+**Modified:**
+- packages/backend/package.json (dependencies, devDependencies, scripts)
+- package.json (root - added pnpm.onlyBuiltDependencies for better-sqlite3)
+- _bmad-output/implementation-artifacts/sprint-status.yaml (story status: ready-for-dev → in-progress → review)
+- _bmad-output/implementation-artifacts/1-2-setup-backend-with-fastify-and-typescript.md (this file - tasks marked complete, dev agent record filled)

@@ -5,8 +5,24 @@
   "description": "Fastify backend for Todo application",
   "type": "module",
   "scripts": {
-    "dev": "echo 'Dev script will be configured in Story 1.2'",
-    "build": "echo 'Build script will be configured in Story 1.2'",
-    "start": "echo 'Start script will be configured in Story 1.2'"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@fastify/env": "^5.0.1",
+    "@fastify/static": "^8.0.2",
+    "@fastify/swagger": "^9.3.0",
+    "@fastify/swagger-ui": "^5.0.1",
+    "better-sqlite3": "^11.10.0",
+    "fastify": "^5.2.0",
+    "pino": "^9.6.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
   }
 }
