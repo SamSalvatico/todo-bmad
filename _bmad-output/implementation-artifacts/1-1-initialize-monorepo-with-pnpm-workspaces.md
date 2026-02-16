@@ -1,6 +1,6 @@
 # Story 1.1: Initialize Monorepo with pnpm Workspaces
 
-Status: review
+Status: in-progress
 
 ## Story
 
@@ -218,6 +218,7 @@ N/A - Infrastructure setup only, no debugging required
 **Created:**
 - package.json
 - pnpm-workspace.yaml
+- pnpm-lock.yaml
 - .gitignore
 - .env.example
 - tsconfig.base.json
@@ -228,4 +229,4 @@ N/A - Infrastructure setup only, no debugging required
 - data/.gitkeep
 
 **Modified:**
-- None (greenfield initialization)
+- _bmad-output/implementation-artifacts/sprint-status.yaml (story status updated)

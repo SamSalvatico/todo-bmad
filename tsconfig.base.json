@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["ES2020"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -17,7 +17,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "incremental": true,
-    "noEmit": false
+    "noEmit": true
   },
   "exclude": [
     "node_modules",
