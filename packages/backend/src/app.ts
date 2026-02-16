@@ -1,10 +1,10 @@
-import Fastify, { FastifyInstance } from 'fastify';
 import cors from '@fastify/cors';
 import env from '@fastify/env';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import type Database from 'better-sqlite3';
-import { envOptions, Config } from './config.js';
+import Fastify, { type FastifyInstance } from 'fastify';
+import { type Config, envOptions } from './config.js';
 import { initializeDatabase } from './db/database.js';
 
 // Extend Fastify's type definitions to include our config
@@ -42,7 +42,7 @@ export async function createApp(): Promise<FastifyInstance> {
 
   // Register CORS plugin
   await app.register(cors, {
-    origin: app.config.CORS_ORIGIN
+    origin: app.config.CORS_ORIGIN,
   });
 
   // Register Swagger documentation
@@ -51,14 +51,14 @@ export async function createApp(): Promise<FastifyInstance> {
       info: {
         title: 'Todo API',
         description: 'Simple todo management API',
-        version: '1.0.0'
-      }
-    }
+        version: '1.0.0',
+      },
+    },
   });
 
   // Register Swagger UI
   await app.register(swaggerUi, {
-    routePrefix: '/docs'
+    routePrefix: '/docs',
   });
 
   // Health check endpoint

@@ -1,7 +1,7 @@
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import Database from 'better-sqlite3';
-import { readFileSync, mkdirSync, existsSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,16 +17,13 @@ export function initializeDatabase(dbPath: string): Database.Database {
   if (!existsSync(dbDir)) {
     mkdirSync(dbDir, { recursive: true });
   }
-  
+
   const db = new Database(dbPath);
-  
+
   // Load and execute init.sql
-  const initSql = readFileSync(
-    join(__dirname, 'init.sql'),
-    'utf8'
-  );
-  
+  const initSql = readFileSync(join(__dirname, 'init.sql'), 'utf8');
+
   db.exec(initSql);
-  
+
   return db;
 }

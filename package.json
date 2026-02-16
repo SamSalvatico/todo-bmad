@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "echo 'Dev script will be configured in Story 1.7'",
     "build": "echo 'Build script will be configured in Story 1.7'",
-    "lint": "echo 'Lint script will be configured in Story 1.4'",
-    "format": "echo 'Format script will be configured in Story 1.4'",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
     "test": "echo 'Test script will be configured in Story 1.5'"
   },
   "workspaces": [
@@ -19,6 +20,11 @@
   },
   "packageManager": "pnpm@10.0.0",
   "pnpm": {
-    "onlyBuiltDependencies": ["better-sqlite3"]
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ]
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.0"
   }
 }

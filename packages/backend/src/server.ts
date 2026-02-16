@@ -11,19 +11,17 @@ async function start() {
     // Start server
     await app.listen({
       port: app.config.PORT,
-      host: app.config.HOST
+      host: app.config.HOST,
     });
 
+    app.log.info(`Server listening on http://${app.config.HOST}:${app.config.PORT}`);
     app.log.info(
-      `Server listening on http://${app.config.HOST}:${app.config.PORT}`
-    );
-    app.log.info(
-      `Swagger documentation available at http://${app.config.HOST}:${app.config.PORT}/docs`
+      `Swagger documentation available at http://${app.config.HOST}:${app.config.PORT}/docs`,
     );
 
     // Graceful shutdown handlers
     const signals = ['SIGTERM', 'SIGINT'] as const;
-    
+
     for (const signal of signals) {
       process.on(signal, async () => {
         app.log.info(`Received ${signal}, closing server gracefully...`);

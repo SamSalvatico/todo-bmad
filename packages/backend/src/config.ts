@@ -8,25 +8,25 @@ export const configSchema = {
   properties: {
     PORT: {
       type: 'number',
-      default: 3000
+      default: 3000,
     },
     HOST: {
       type: 'string',
-      default: '0.0.0.0'
+      default: '0.0.0.0',
     },
     NODE_ENV: {
       type: 'string',
-      default: 'development'
+      default: 'development',
     },
     DB_PATH: {
       type: 'string',
-      default: './data/todos.db'
+      default: './data/todos.db',
     },
     CORS_ORIGIN: {
       type: 'string',
-      default: 'http://localhost:5173'
-    }
-  }
+      default: 'http://localhost:5173',
+    },
+  },
 } as const;
 
 /**
@@ -47,5 +47,5 @@ export const envOptions = {
   confKey: 'config',
   schema: configSchema,
   dotenv: true,
-  data: process.env
+  data: process.env,
 };
