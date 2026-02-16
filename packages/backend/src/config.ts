@@ -4,7 +4,7 @@
  */
 export const configSchema = {
   type: 'object',
-  required: [],
+  required: ['PORT', 'HOST', 'NODE_ENV', 'DB_PATH', 'CORS_ORIGIN'],
   properties: {
     PORT: {
       type: 'number',

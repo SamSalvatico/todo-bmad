@@ -1,6 +1,6 @@
 # Story 1.2: Setup Backend with Fastify and TypeScript
 
-Status: review
+Status: done
 
 ## Story
 
@@ -415,6 +415,12 @@ _To be filled by dev agent during implementation_
 
 All acceptance criteria satisfied. Backend foundation ready for route implementation in Story 2.2.
 
+**Review Fixes (2026-02-16):**
+
+- Enforced required env vars in config schema to enable fail-fast validation
+- Aligned logger level with validated `NODE_ENV`
+- Ensured database connection closes on server shutdown
+
 ### File List
 
 **Created:**
@@ -430,5 +436,7 @@ All acceptance criteria satisfied. Backend foundation ready for route implementa
 **Modified:**
 - packages/backend/package.json (dependencies, devDependencies, scripts)
 - package.json (root - added pnpm.onlyBuiltDependencies for better-sqlite3)
-- _bmad-output/implementation-artifacts/sprint-status.yaml (story status: ready-for-dev → in-progress → review)
+- packages/backend/src/app.ts (logger config, db close hook)
+- packages/backend/src/config.ts (required env vars)
+- _bmad-output/implementation-artifacts/sprint-status.yaml (story status: ready-for-dev → in-progress → review → done)
 - _bmad-output/implementation-artifacts/1-2-setup-backend-with-fastify-and-typescript.md (this file - tasks marked complete, dev agent record filled)
