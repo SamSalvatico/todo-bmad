@@ -1,6 +1,6 @@
 # Story 1.1: Initialize Monorepo with pnpm Workspaces
 
-Status: in-progress
+Status: done
 
 ## Story
 
