@@ -1,6 +1,6 @@
 # Story 1.3: Setup Frontend with Vite and React
 
-Status: ready-for-dev
+Status: review
 
 ## Story
 
@@ -37,71 +37,71 @@ So that I can build a fast, modern UI with hot module replacement.
 
 ## Tasks / Subtasks
 
-- [ ] Initialize Vite React TypeScript template (AC: frontend package setup)
-  - [ ] Navigate to `packages/frontend/` directory
-  - [ ] Run `pnpm create vite . -- --template react-ts` to scaffold React + TypeScript + Vite
-  - [ ] Verify files created: `index.html`, `src/main.tsx`, `src/App.tsx`, `vite.config.ts`, `tsconfig.json`
-  - [ ] Review generated package.json - note Vite+React versions
+- [x] Initialize Vite React TypeScript template (AC: frontend package setup)
+  - [x] Navigate to `packages/frontend/` directory
+  - [x] Run `pnpm create vite . -- --template react-ts` to scaffold React + TypeScript + Vite
+  - [x] Verify files created: `index.html`, `src/main.tsx`, `src/App.tsx`, `vite.config.ts`, `tsconfig.json`
+  - [x] Review generated package.json - note Vite+React versions
 
-- [ ] Update frontend package.json metadata (AC: frontend package setup)
-  - [ ] Set `"name": "@todo-bmad/frontend"` to match monorepo naming pattern from Story 1.1
-  - [ ] Set `"version": "0.1.0"`
-  - [ ] Set `"private": true`
-  - [ ] Add `"description": "React frontend for Todo application"`
-  - [ ] Verify `"type": "module"` exists (Vite default, required for ESM)
+- [x] Update frontend package.json metadata (AC: frontend package setup)
+  - [x] Set `"name": "@todo-bmad/frontend"` to match monorepo naming pattern from Story 1.1
+  - [x] Set `"version": "0.1.0"`
+  - [x] Set `"private": true`
+  - [x] Add `"description": "React frontend for Todo application"`
+  - [x] Verify `"type": "module"` exists (Vite default, required for ESM)
 
-- [ ] Install additional frontend dependencies (AC: frontend package setup)
-  - [ ] Add `tailwindcss` and `@tailwindcss/vite` as dev dependencies
-  - [ ] Run `pnpm install` from packages/frontend/
-  - [ ] Verify all dependencies install successfully without conflicts
-  - [ ] Check that React 19.x is installed (architecture requirement)
+- [x] Install additional frontend dependencies (AC: frontend package setup)
+  - [x] Add `tailwindcss` and `@tailwindcss/vite` as dev dependencies
+  - [x] Run `pnpm install` from packages/frontend/
+  - [x] Verify all dependencies install successfully without conflicts
+  - [x] Check that React 19.x is installed (architecture requirement)
 
-- [ ] Configure TypeScript for frontend (AC: frontend package setup)
-  - [ ] Edit `packages/frontend/tsconfig.json` to extend `../../tsconfig.base.json`
-  - [ ] Add frontend-specific compiler options: `"jsx": "react-jsx"`, `"jsxImportSource": "react"`
-  - [ ] Configure `"include": ["src"]` and `"exclude": ["dist", "node_modules"]`
-  - [ ] Create `tsconfig.node.json` for Vite config file (if not generated)
-  - [ ] Verify TypeScript recognizes configuration: `pnpm tsc --noEmit`
+- [x] Configure TypeScript for frontend (AC: frontend package setup)
+  - [x] Edit `packages/frontend/tsconfig.json` to extend `../../tsconfig.base.json`
+  - [x] Add frontend-specific compiler options: `"jsx": "react-jsx"`, `"jsxImportSource": "react"`
+  - [x] Configure `"include": ["src"]` and `"exclude": ["dist", "node_modules"]`
+  - [x] Create `tsconfig.node.json` for Vite config file (if not generated)
+  - [x] Verify TypeScript recognizes configuration: `pnpm tsc --noEmit`
 
-- [ ] Configure Tailwind CSS (AC: Tailwind setup)
-  - [ ] Replace `packages/frontend/src/index.css` content with: `@import "tailwindcss";`
-  - [ ] Ensure index.css is imported in `src/main.tsx`
-  - [ ] Create `packages/frontend/vite.config.ts` if not exists
-  - [ ] Add `@tailwindcss/vite` plugin to Vite config
-  - [ ] Test Tailwind utilities render correctly by adding a test class to App.tsx
+- [x] Configure Tailwind CSS (AC: Tailwind setup)
+  - [x] Replace `packages/frontend/src/index.css` content with: `@import "tailwindcss";`
+  - [x] Ensure index.css is imported in `src/main.tsx`
+  - [x] Create `packages/frontend/vite.config.ts` if not exists
+  - [x] Add `@tailwindcss/vite` plugin to Vite config
+  - [x] Test Tailwind utilities render correctly by adding a test class to App.tsx
 
-- [ ] Configure Vite proxy for API requests (AC: Tailwind setup + API proxy)
-  - [ ] Edit `packages/frontend/vite.config.ts`
-  - [ ] Add server.proxy configuration: `'/api': { target: 'http://localhost:3000', changeOrigin: true }`
-  - [ ] Ensure changeOrigin is true (required for CORS handling in development)
-  - [ ] Add comment explaining proxy routes `/api/*` to backend during development
+- [x] Configure Vite proxy for API requests (AC: Tailwind setup + API proxy)
+  - [x] Edit `packages/frontend/vite.config.ts`
+  - [x] Add server.proxy configuration: `'/api': { target: 'http://localhost:3000', changeOrigin: true }`
+  - [x] Ensure changeOrigin is true (required for CORS handling in development)
+  - [x] Add comment explaining proxy routes `/api/*` to backend during development
 
-- [ ] Setup development scripts (AC: frontend running)
-  - [ ] Verify Vite default scripts in package.json: `dev`, `build`, `preview`
-  - [ ] Ensure `"dev": "vite"` starts dev server on port 5173
-  - [ ] Ensure `"build": "vite build"` outputs to `dist/`
-  - [ ] Add `"preview": "vite preview"` for testing production builds locally
+- [x] Setup development scripts (AC: frontend running)
+  - [x] Verify Vite default scripts in package.json: `dev`, `build`, `preview`
+  - [x] Ensure `"dev": "vite"` starts dev server on port 5173
+  - [x] Ensure `"build": "vite build"` outputs to `dist/`
+  - [x] Add `"preview": "vite preview"` for testing production builds locally
 
-- [ ] Verify frontend functionality independently (AC: frontend running)
-  - [ ] Run `pnpm --filter frontend dev` from project root
-  - [ ] Verify Vite dev server starts on http://localhost:5173
-  - [ ] Verify default Vite + React page renders with no console errors
-  - [ ] Test Hot Module Replacement: edit App.tsx, save, verify hot reload
-  - [ ] Test Tailwind: add utility class like `text-blue-500`, verify styling applies
+- [x] Verify frontend functionality independently (AC: frontend running)
+  - [x] Run `pnpm --filter frontend dev` from project root
+  - [x] Verify Vite dev server starts on http://localhost:5173
+  - [x] Verify default Vite + React page renders with no console errors
+  - [x] Test Hot Module Replacement: edit App.tsx, save, verify hot reload
+  - [x] Test Tailwind: add utility class like `text-blue-500`, verify styling applies
 
-- [ ] Verify API proxy configuration with backend (AC: API proxy)
-  - [ ] Start backend server: `pnpm --filter backend dev` (in separate terminal)
-  - [ ] Start frontend server: `pnpm --filter frontend dev` (in separate terminal)
-  - [ ] Open browser DevTools Network tab
-  - [ ] Test proxy by visiting `http://localhost:5173/api/` in browser
-  - [ ] Verify request is proxied to backend (should show Swagger/404, not Vite 404)
-  - [ ] Check backend logs to confirm request was received
+- [x] Verify API proxy configuration with backend (AC: API proxy)
+  - [x] Start backend server: `pnpm --filter backend dev` (in separate terminal)
+  - [x] Start frontend server: `pnpm --filter frontend dev` (in separate terminal)
+  - [x] Open browser DevTools Network tab
+  - [x] Test proxy by visiting `http://localhost:5173/api/` in browser
+  - [x] Verify request is proxied to backend (should show Swagger/404, not Vite 404)
+  - [x] Check backend logs to confirm request was received
 
-- [ ] Clean up default Vite template (AC: basic app renders)
-  - [ ] Simplify `packages/frontend/src/App.tsx` to minimal "Todo App" heading
-  - [ ] Remove unnecessary assets from `src/assets/` (keep only if needed)
-  - [ ] Update `index.html` title to "Todo App"
-  - [ ] Verify clean app renders at http://localhost:5173 with no errors
+- [x] Clean up default Vite template (AC: basic app renders)
+  - [x] Simplify `packages/frontend/src/App.tsx` to minimal "Todo App" heading
+  - [x] Remove unnecessary assets from `src/assets/` (keep only if needed)
+  - [x] Update `index.html` title to "Todo App"
+  - [x] Verify clean app renders at http://localhost:5173 with no errors
 
 ## Dev Notes
 
@@ -470,16 +470,40 @@ Reference: [Epics.md - Epic 1](../../_bmad-output/planning-artifacts/epics.md#ep
 
 ### Agent Model Used
 
-_To be filled by dev agent_
+GPT-5.2-Codex
 
 ### Debug Log References
 
-_To be filled by dev agent_
+- Vite scaffolding: `pnpm create vite . -- --template react-ts` (frontend package)
+- TypeScript check: `pnpm exec tsc --noEmit`
+- Frontend verification: Playwright navigation + HMR update detection
+- API proxy verification: `GET /api/` proxied to backend (404 from Fastify)
 
 ### Completion Notes List
 
-_To be filled by dev agent_
+- Implemented Vite + React frontend scaffold with monorepo metadata and scripts.
+- Added Tailwind v4 via `@tailwindcss/vite` and simplified App styling.
+- Configured Vite proxy for `/api/*` and aligned TypeScript configs with base settings.
+- Verified dev server start, HMR, Tailwind utility rendering, and API proxy routing.
+- Tests deferred to Story 1.5 per user; Vite 7.3.1 used (no stable 6.x available).
 
 ### File List
 
-_To be filled by dev agent after implementation_
+- _bmad-output/implementation-artifacts/1-3-setup-frontend-with-vite-and-react.md
+- _bmad-output/implementation-artifacts/sprint-status.yaml
+- packages/frontend/.gitignore
+- packages/frontend/README.md
+- packages/frontend/eslint.config.js
+- packages/frontend/index.html
+- packages/frontend/package.json
+- packages/frontend/public/vite.svg
+- packages/frontend/src/App.tsx
+- packages/frontend/src/index.css
+- packages/frontend/src/main.tsx
+- packages/frontend/tsconfig.app.json
+- packages/frontend/tsconfig.json
+- packages/frontend/tsconfig.node.json
+- packages/frontend/vite.config.ts
+- packages/frontend/src/App.css (deleted)
+- packages/frontend/src/assets/react.svg (deleted)
+- pnpm-lock.yaml
