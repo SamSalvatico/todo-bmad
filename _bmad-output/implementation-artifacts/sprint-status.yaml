@@ -42,7 +42,7 @@ story_location: /Users/samuelesalvatico/Nearform/TestRepositories/todo-bmad/_bma
 development_status:
   # Epic 1: Project Foundation & Development Infrastructure
   epic-1: in-progress
-  1-1-initialize-monorepo-with-pnpm-workspaces: ready-for-dev
+  1-1-initialize-monorepo-with-pnpm-workspaces: review
   1-2-setup-backend-with-fastify-and-typescript: backlog
   1-3-setup-frontend-with-vite-and-react: backlog
   1-4-configure-code-quality-tools-biome-typescript-strict: backlog

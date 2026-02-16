@@ -1,6 +1,6 @@
 # Story 1.1: Initialize Monorepo with pnpm Workspaces
 
-Status: ready-for-dev
+Status: review
 
 ## Story
 
@@ -26,27 +26,27 @@ So that I can manage dependencies efficiently and establish the foundation for t
 
 ## Tasks / Subtasks
 
-- [ ] Initialize root monorepo structure (AC: all)
-  - [ ] Create root `package.json` with workspace configuration and scripts
-  - [ ] Create `pnpm-workspace.yaml` with `packages: ['packages/*']`
-  - [ ] Create `.gitignore` with proper exclusions
-  - [ ] Create `.env.example` documenting all required environment variables
-  - [ ] Create shared `tsconfig.base.json` with strict mode enabled
+- [x] Initialize root monorepo structure (AC: all)
+  - [x] Create root `package.json` with workspace configuration and scripts
+  - [x] Create `pnpm-workspace.yaml` with `packages: ['packages/*']`
+  - [x] Create `.gitignore` with proper exclusions
+  - [x] Create `.env.example` documenting all required environment variables
+  - [x] Create shared `tsconfig.base.json` with strict mode enabled
   
-- [ ] Create frontend package structure (AC: all)
-  - [ ] Create `packages/frontend/` directory
-  - [ ] Initialize `packages/frontend/package.json` with name and basic fields
-  - [ ] Create placeholder `packages/frontend/src/` directory
+- [x] Create frontend package structure (AC: all)
+  - [x] Create `packages/frontend/` directory
+  - [x] Initialize `packages/frontend/package.json` with name and basic fields
+  - [x] Create placeholder `packages/frontend/src/` directory
   
-- [ ] Create backend package structure (AC: all)
-  - [ ] Create `packages/backend/` directory
-  - [ ] Initialize `packages/backend/package.json` with name and basic fields
-  - [ ] Create placeholder `packages/backend/src/` directory
+- [x] Create backend package structure (AC: all)
+  - [x] Create `packages/backend/` directory
+  - [x] Initialize `packages/backend/package.json` with name and basic fields
+  - [x] Create placeholder `packages/backend/src/` directory
   
-- [ ] Verify pnpm workspace functionality (AC: all)
-  - [ ] Run `pnpm install` from root and verify successful installation
-  - [ ] Verify single `node_modules` at root with proper hoisting
-  - [ ] Test workspace commands work: `pnpm --filter frontend <command>`, `pnpm --filter backend <command>`
+- [x] Verify pnpm workspace functionality (AC: all)
+  - [x] Run `pnpm install` from root and verify successful installation
+  - [x] Verify single `node_modules` at root with proper hoisting
+  - [x] Test workspace commands work: `pnpm --filter frontend <command>`, `pnpm --filter backend <command>`
 
 ## Dev Notes
 
@@ -180,16 +180,52 @@ Reference: [Architecture.md#Testing Strategy](../../planning-artifacts/architect
 
 ### Agent Model Used
 
-_To be filled by Dev Agent_
+Claude Sonnet 4.5
 
 ### Debug Log References
 
-_To be filled by Dev Agent_
+N/A - Infrastructure setup only, no debugging required
 
 ### Completion Notes List
 
-_To be filled by Dev Agent_
+**Implementation Summary:**
+- Created complete monorepo structure with pnpm workspaces (v10.0.0)
+- Configured root package.json with workspace references and placeholder scripts
+- Set up pnpm-workspace.yaml targeting `packages/*` pattern
+- Created frontend and backend package directories with scoped naming (@todo-bmad/*)
+- Established TypeScript base configuration with strict mode enabled (strict, noUncheckedIndexedAccess, noImplicitOverride)
+- Configured .gitignore to exclude node_modules, dist, .env, data/, and other build artifacts
+- Documented environment variables in .env.example for both frontend and backend
+- Created data/ directory with .gitkeep for SQLite database volume
+
+**Verification Results:**
+- ✅ pnpm install completed successfully (detected all 3 workspace projects)
+- ✅ Single node_modules created at root with proper hoisting
+- ✅ Workspace filter commands working: `pnpm --filter @todo-bmad/frontend` and `pnpm --filter @todo-bmad/backend`
+- ✅ All acceptance criteria satisfied
+
+**Version Configuration (Updated per user request):**
+- Node.js: >=24.0.0 (current environment: v22.21.1 - will need upgrade for production)
+- pnpm: >=10.0.0 (current: 10.0.0 ✅)
+
+**Notes:**
+- No automated tests created - infrastructure setup story
+- Foundation ready for subsequent stories (1.2-1.7) to populate package implementations
+- All package.json scripts are placeholders pointing to future story implementations
 
 ### File List
 
-_To be filled by Dev Agent_
+**Created:**
+- package.json
+- pnpm-workspace.yaml
+- .gitignore
+- .env.example
+- tsconfig.base.json
+- packages/frontend/package.json
+- packages/frontend/src/ (directory)
+- packages/backend/package.json
+- packages/backend/src/ (directory)
+- data/.gitkeep
+
+**Modified:**
+- None (greenfield initialization)

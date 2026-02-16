@@ -1,0 +1,12 @@
+{
+  "name": "@todo-bmad/backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fastify backend for Todo application",
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Dev script will be configured in Story 1.2'",
+    "build": "echo 'Build script will be configured in Story 1.2'",
+    "start": "echo 'Start script will be configured in Story 1.2'"
+  }
+}
