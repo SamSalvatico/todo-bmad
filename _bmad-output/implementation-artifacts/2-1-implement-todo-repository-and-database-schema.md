@@ -1,6 +1,6 @@
 # Story 2.1: Implement Todo Repository and Database Schema
 
-Status: review
+Status: done
 
 ## Story
 
@@ -227,7 +227,11 @@ None (first story in Epic 2)
 - Added TodoRepository with CRUD, init.sql execution, and field mapping
 - Added Todo types for repository and API request payloads
 - Added unit tests for repository CRUD behavior and ordering
-- Tests reported passing by user: `pnpm --filter backend test`
+- **Code Review Applied (2026-02-17):**
+  - Fixed: Added empty string validation in `create()` method (throws if text is empty or whitespace-only)
+  - Fixed: Removed timestamp fallback logic (now always uses DB-generated CURRENT_TIMESTAMP)
+  - Fixed: Added 2 new tests for validation error handling and timestamp consistency
+  - Result: All 7 repository tests passing (5 original + 2 new), 34 total backend tests passing
 
 ### File List
 
