@@ -1,6 +1,6 @@
 # Story 1.5: Setup Testing Infrastructure (Vitest, Playwright)
 
-Status: review
+Status: done
 
 ## Story
 
@@ -428,6 +428,9 @@ None
 - ✅ All tests passing: 6 unit/integration tests + 1 E2E test
 - ✅ Applied Biome formatting to all test files for code quality compliance
 - ✅ Root test script now orchestrates tests across all packages using pnpm workspaces
+- ✅ Review fix: config tests now use a temp DB path and include an invalid env validation test
+- ✅ Review note: story file list reflects committed implementation; review-time git diffs only include review fixes
+- ✅ Verified: `pnpm --filter backend test` passes after review fixes (user-confirmed)
 
 ### File List
 
@@ -444,3 +447,5 @@ None
 - packages/backend/package.json (added test script)
 - packages/frontend/package.json (added test and test:e2e scripts)
 - package.json (updated root test script)
+- packages/backend/src/config.test.ts (review fixes)
+- _bmad-output/implementation-artifacts/1-5-setup-testing-infrastructure-vitest-playwright.md (review notes)
