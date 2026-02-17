@@ -21,6 +21,8 @@ A full-stack Todo application built as a pnpm workspace monorepo with a React SP
 ## Quick Start
 ```bash
 # 1) Clone the repo
+git clone <repo-url>
+cd todo-bmad
 # 2) Set environment variables
 cp .env.example .env
 
@@ -48,6 +50,9 @@ Workspaces keep frontend and backend dependencies isolated while allowing a sing
 - Development: Vite proxies `/api/*` to the Fastify server (`packages/frontend/vite.config.ts`).
 - Production: Fastify serves the built frontend and keeps `/api` on the same origin.
 
+### Backend stack
+Fastify provides the REST API, and SQLite (`better-sqlite3`) stores data locally for a zero-config developer experience.
+
 ### Repository pattern
 Database access is isolated in the backend repository layer, with `snake_case` SQLite fields mapped to `camelCase` API responses.
 
@@ -60,6 +65,9 @@ Database access is isolated in the backend repository layer, with `snake_case` S
 ### Testing strategy
 - Vitest for backend and frontend unit/integration tests (co-located with source files)
 - Playwright for end-to-end testing against the running app
+
+### Docker deployment
+Docker uses a multi-stage build with docker-compose for local production parity.
 
 ### Key files
 - Backend app factory: `packages/backend/src/app.ts`
@@ -103,6 +111,7 @@ Database access is isolated in the backend repository layer, with `snake_case` S
 - `pnpm test`: Run all unit/integration tests across workspaces
 - `pnpm test:e2e`: Run Playwright tests (frontend package)
 - `pnpm lint`: Run Biome checks
+- `pnpm check`: Run Biome checks with auto-fixes
 - `pnpm format`: Format code with Biome
 
 ## Docker Deployment
