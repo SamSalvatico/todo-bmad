@@ -28,6 +28,10 @@ export class TodoRepository {
   }
 
   create(text: string): Todo {
+    if (!text || text.trim() === '') {
+      throw new Error('Text cannot be empty');
+    }
+
     const insert = this.db.prepare('INSERT INTO todos (text, completed) VALUES (?, 0)');
     const result = insert.run(text);
     const row = this.db
@@ -35,12 +39,7 @@ export class TodoRepository {
       .get(Number(result.lastInsertRowid)) as DbTodoRow | undefined;
 
     if (!row) {
-      return {
-        id: Number(result.lastInsertRowid),
-        text,
-        completed: false,
-        createdAt: new Date().toISOString(),
-      };
+      throw new Error('Failed to retrieve created todo');
     }
 
     return mapTodoRow(row);

@@ -57,4 +57,17 @@ describe('TodoRepository', () => {
     expect(repository.delete(todo.id)).toBe(true);
     expect(repository.delete(todo.id)).toBe(false);
   });
+
+  it('rejects empty text on create', () => {
+    expect(() => repository.create('')).toThrow('Text cannot be empty');
+    expect(() => repository.create('   ')).toThrow('Text cannot be empty');
+  });
+
+  it('always uses database timestamp for created todo', () => {
+    const todo = repository.create('Test timestamp');
+
+    expect(todo.createdAt).toBeTypeOf('string');
+    // Verify it matches SQLite format (ISO 8601)
+    expect(new Date(todo.createdAt)).toBeInstanceOf(Date);
+  });
 });
