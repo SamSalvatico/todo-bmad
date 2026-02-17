@@ -5,7 +5,7 @@
   "description": "Full-stack Todo application with React + Fastify + SQLite",
   "scripts": {
     "dev": "echo 'Dev script will be configured in Story 1.7'",
-    "build": "echo 'Build script will be configured in Story 1.7'",
+    "build": "pnpm --filter backend build && pnpm --filter frontend build",
     "lint": "biome check .",
     "format": "biome format --write .",
     "check": "biome check --write .",
