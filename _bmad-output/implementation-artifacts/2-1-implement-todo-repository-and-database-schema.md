@@ -1,6 +1,6 @@
 # Story 2.1: Implement Todo Repository and Database Schema
 
-Status: ready-for-dev
+Status: review
 
 ## Story
 
@@ -22,26 +22,26 @@ so that I have a clean data access boundary and the todos table is created when 
 
 ## Tasks / Subtasks
 
-- [ ] Create init.sql with table schema (AC: 2)
-  - [ ] Define todos table with correct columns and constraints
-  - [ ] Ensure CREATE TABLE IF NOT EXISTS for idempotent initialization
-- [ ] Create types/todo.ts with TypeScript interfaces (AC: 7)
-  - [ ] Define Todo interface with all fields in camelCase
-  - [ ] Define CreateTodoRequest and UpdateTodoRequest
-- [ ] Create repositories/todo-repository.ts with CRUD methods (AC: 1, 3-6)
-  - [ ] Implement TodoRepository class constructor with DB initialization
-  - [ ] Implement create() method with field mapping
-  - [ ] Implement getAll() method with ordering and field mapping
-  - [ ] Implement update() method with null handling
-  - [ ] Implement delete() method with success/failure return
-- [ ] Create repositories/todo-repository.test.ts with unit tests (AC: 8)
-  - [ ] Test create: inserts and returns todo with correct fields
-  - [ ] Test getAll: retrieves all todos in correct order
-  - [ ] Test update: changes completion status, returns updated todo, returns null for missing id
-  - [ ] Test delete: removes todo and returns true, returns false for missing id
-- [ ] Verify all tests pass (AC: 9)
-  - [ ] Run `pnpm --filter backend test`
-  - [ ] Confirm 100% passing test suite for repository layer
+- [x] Create init.sql with table schema (AC: 2)
+  - [x] Define todos table with correct columns and constraints
+  - [x] Ensure CREATE TABLE IF NOT EXISTS for idempotent initialization
+- [x] Create types/todo.ts with TypeScript interfaces (AC: 7)
+  - [x] Define Todo interface with all fields in camelCase
+  - [x] Define CreateTodoRequest and UpdateTodoRequest
+- [x] Create repositories/todo-repository.ts with CRUD methods (AC: 1, 3-6)
+  - [x] Implement TodoRepository class constructor with DB initialization
+  - [x] Implement create() method with field mapping
+  - [x] Implement getAll() method with ordering and field mapping
+  - [x] Implement update() method with null handling
+  - [x] Implement delete() method with success/failure return
+- [x] Create repositories/todo-repository.test.ts with unit tests (AC: 8)
+  - [x] Test create: inserts and returns todo with correct fields
+  - [x] Test getAll: retrieves all todos in correct order
+  - [x] Test update: changes completion status, returns updated todo, returns null for missing id
+  - [x] Test delete: removes todo and returns true, returns false for missing id
+- [x] Verify all tests pass (AC: 9)
+  - [x] Run `pnpm --filter backend test`
+  - [x] Confirm 100% passing test suite for repository layer
 
 ## Dev Notes
 
@@ -216,7 +216,7 @@ pnpm test
 
 ### Agent Model Used
 
-Claude Haiku 4.5
+GPT-5.2-Codex
 
 ### Debug Log References
 
@@ -224,19 +224,24 @@ None (first story in Epic 2)
 
 ### Completion Notes
 
-- Story was prepared by Scrum Master using comprehensive analysis
-- Template provides clear AC and task breakdown
-- Comprehensive context provided for flawless developer implementation
-- All necessary library dependencies already installed from Story 1.2
-- Testing infrastructure ready from Story 1.5
+- Added TodoRepository with CRUD, init.sql execution, and field mapping
+- Added Todo types for repository and API request payloads
+- Added unit tests for repository CRUD behavior and ordering
+- Tests reported passing by user: `pnpm --filter backend test`
 
 ### File List
 
-**To be created:**
-- `packages/backend/src/db/init.sql`
+**Created:**
 - `packages/backend/src/types/todo.ts`
 - `packages/backend/src/repositories/todo-repository.ts`
 - `packages/backend/src/repositories/todo-repository.test.ts`
+
+**Existing (verified):**
+- `packages/backend/src/db/init.sql`
+
+### Change Log
+
+- 2026-02-17: Implemented todo repository, types, and tests for CRUD behavior.
 
 **To be modified:**
 - (none - all dependencies already in place from Story 1.2)
