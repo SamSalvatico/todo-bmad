@@ -31,6 +31,14 @@ describe('Docker Configuration Integration Tests', () => {
       expect(fs.existsSync(dockerfilePath)).toBe(true);
     });
 
+    it('should copy node_modules to production stage', () => {
+      const dockerfilePath = path.join(__dirname, '../../../Dockerfile');
+      const content = fs.readFileSync(dockerfilePath, 'utf-8');
+      
+      // Verify production stage copies backend node_modules
+      expect(content).toContain('COPY --from=builder /app/packages/backend/node_modules ./packages/backend/node_modules');
+    });
+
     it('should have multi-stage Dockerfile', () => {
       const dockerfilePath = path.join(__dirname, '../../../Dockerfile');
       const content = fs.readFileSync(dockerfilePath, 'utf-8');
@@ -48,13 +56,17 @@ describe('Docker Configuration Integration Tests', () => {
       expect(content).toContain('CMD ["node", "packages/backend/dist/server.js"]');
     });
 
-    it('should have Corepack enabled in build and production stages', () => {
+    it('should have Corepack enabled in build stage', () => {
       const dockerfilePath = path.join(__dirname, '../../../Dockerfile');
       const content = fs.readFileSync(dockerfilePath, 'utf-8');
       
-      // Count occurrences of corepack enable (should be in both stages)
+      // Count occurrences of corepack enable (should be in build stage only)
       const corepackEnableCount = (content.match(/corepack enable/g) || []).length;
-      expect(corepackEnableCount).toBeGreaterThanOrEqual(2);
+      expect(corepackEnableCount).toBeGreaterThanOrEqual(1);
+      
+      // Verify it's in the builder stage
+      const builderSection = content.substring(0, content.indexOf('FROM node:24-bookworm-slim'));
+      expect(builderSection).toContain('corepack enable');
     });
   });
 

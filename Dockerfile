@@ -21,10 +21,6 @@ RUN pnpm run build
 # Production stage: minimal runtime image
 FROM node:24-bookworm-slim
 
-# Enable Corepack for runtime (needed for pnpm execution if required)
-ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
-RUN corepack enable
-
 # Set production environment
 ENV NODE_ENV=production
 
@@ -33,6 +29,9 @@ WORKDIR /app
 
 # Copy built backend (includes compiled JavaScript)
 COPY --from=builder /app/packages/backend/dist ./packages/backend/dist
+
+# Copy backend node_modules (required for runtime dependencies)
+COPY --from=builder /app/packages/backend/node_modules ./packages/backend/node_modules
 
 # Copy built frontend (static files)
 COPY --from=builder /app/packages/frontend/dist ./packages/frontend/dist
