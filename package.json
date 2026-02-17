@@ -4,12 +4,13 @@
   "private": true,
   "description": "Full-stack Todo application with React + Fastify + SQLite",
   "scripts": {
-    "dev": "echo 'Dev script will be configured in Story 1.7'",
+    "dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
     "build": "pnpm --filter backend build && pnpm --filter frontend build",
     "lint": "biome check .",
     "format": "biome format --write .",
     "check": "biome check --write .",
-    "test": "pnpm --recursive test"
+    "test": "pnpm --recursive test",
+    "test:e2e": "pnpm --filter frontend test:e2e"
   },
   "workspaces": [
     "packages/*"
@@ -25,6 +26,7 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.0"
+    "@biomejs/biome": "^2.4.0",
+    "concurrently": "^9.2.1"
   }
 }
