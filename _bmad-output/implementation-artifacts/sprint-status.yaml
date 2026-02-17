@@ -55,7 +55,7 @@ development_status:
   epic-2: in-progress
   2-1-implement-todo-repository-and-database-schema: done
   2-2-create-todo-crud-api-endpoints-with-validation: done
-  2-3-build-frontend-api-wrapper-and-type-definitions: backlog
+  2-3-build-frontend-api-wrapper-and-type-definitions: done
   2-4-create-core-todo-ui-components: backlog
   2-5-implement-todo-state-management-with-use-todos-hook: backlog
   2-6-integrate-complete-todo-workflow-create-view-complete-delete: backlog

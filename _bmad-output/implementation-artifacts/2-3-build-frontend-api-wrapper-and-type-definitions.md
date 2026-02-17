@@ -1,6 +1,6 @@
 # Story 2.3: Build Frontend API Wrapper and Type Definitions
 
-Status: ready-for-dev
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -25,17 +25,17 @@ so that components never call fetch directly and errors are handled uniformly.
 
 ## Tasks / Subtasks
 
-- [ ] Define shared frontend types (AC: 1-4)
-  - [ ] Create `packages/frontend/src/types/todo.ts` with `Todo`, `CreateTodoRequest`, `ApiResult<T>`
-- [ ] Implement API wrapper (AC: 5-9)
-  - [ ] Add `getTodos()` for `GET /api/todos`
-  - [ ] Add `createTodo(text)` for `POST /api/todos`
-  - [ ] Add `updateTodo(id, completed)` for `PATCH /api/todos/:id`
-  - [ ] Add `deleteTodo(id)` for `DELETE /api/todos/:id`
-  - [ ] Centralize response parsing + error extraction
-- [ ] Add unit tests (AC: 10)
-  - [ ] Mock `fetch` for success and failure paths
-  - [ ] Validate error parsing from JSON and statusText fallback
+- [x] Define shared frontend types (AC: 1-4)
+  - [x] Create `packages/frontend/src/types/todo.ts` with `Todo`, `CreateTodoRequest`, `ApiResult<T>`
+- [x] Implement API wrapper (AC: 5-9)
+  - [x] Add `getTodos()` for `GET /api/todos`
+  - [x] Add `createTodo(text)` for `POST /api/todos`
+  - [x] Add `updateTodo(id, completed)` for `PATCH /api/todos/:id`
+  - [x] Add `deleteTodo(id)` for `DELETE /api/todos/:id`
+  - [x] Centralize response parsing + error extraction
+- [x] Add unit tests (AC: 10)
+  - [x] Mock `fetch` for success and failure paths
+  - [x] Validate error parsing from JSON and statusText fallback
 
 ## Dev Notes
 
@@ -120,8 +120,24 @@ None
 ### Completion Notes List
 
 - Ultimate context engine analysis completed - comprehensive developer guide created
+- ✅ Created type definitions: `Todo`, `CreateTodoRequest`, `ApiResult<T>` matching backend schema
+- ✅ Implemented API wrapper with centralized error handling for all CRUD operations
+- ✅ All 13 unit tests pass covering success/failure paths, network errors, and error body parsing
+- ✅ RED-GREEN-REFACTOR cycle complete: tests written first, implementation follows, all tests pass
+- ✅ Full test suite passes with no regressions (16 tests total)
+- ✅ Review fixes: handle 2xx JSON parse failures without masking as network errors
+- ✅ Added tests for create/update parse failures and network errors; restored `fetch` after each test
+- ✅ Tests: `pnpm --filter frontend test --run` (21 tests)
 
 ### File List
 
 **Created:**
+- `packages/frontend/src/types/todo.ts`
+- `packages/frontend/src/api.ts`
+- `packages/frontend/src/api.test.ts`
+
+**Modified:**
+- `packages/frontend/src/api.ts`
+- `packages/frontend/src/api.test.ts`
 - `_bmad-output/implementation-artifacts/2-3-build-frontend-api-wrapper-and-type-definitions.md`
+- `_bmad-output/implementation-artifacts/sprint-status.yaml`
