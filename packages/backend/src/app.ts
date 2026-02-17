@@ -9,6 +9,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { type Config, envOptions } from './config.js';
 import { initializeDatabase } from './db/database.js';
+import { TodoRepository } from './repositories/todo-repository.js';
+import { todoRoutes } from './routes/todo-routes.js';
 
 // Get __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -41,6 +43,8 @@ export async function createApp(): Promise<FastifyInstance> {
   const db = initializeDatabase(app.config.DB_PATH);
   app.decorate('db', db);
   app.log.info({ dbPath: app.config.DB_PATH }, 'Database initialized');
+
+  const todoRepository = new TodoRepository(db);
 
   app.addHook('onClose', async (instance) => {
     instance.log.info('Closing database connection');
@@ -91,6 +95,8 @@ export async function createApp(): Promise<FastifyInstance> {
   app.get('/health', async () => {
     return { status: 'ok', timestamp: new Date().toISOString() };
   });
+
+  await app.register(todoRoutes, { todoRepository });
 
   return app;
 }

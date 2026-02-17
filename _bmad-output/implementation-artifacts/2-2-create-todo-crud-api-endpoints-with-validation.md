@@ -1,6 +1,6 @@
 # Story 2.2: Create Todo CRUD API Endpoints with Validation
 
-Status: ready-for-dev
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -15,7 +15,7 @@ so that the frontend can perform all todo operations with proper error handling.
 1. **Schemas**: `packages/backend/src/schemas/todo-schemas.ts` exports `createTodoSchema`, `updateTodoSchema`, and `todoParamsSchema`.
 2. **Create schema**: `createTodoSchema` validates `{ body: { type: 'object', properties: { text: { type: 'string', minLength: 1, maxLength: 500 } }, required: ['text'] } }`.
 3. **Update schema**: `updateTodoSchema` validates `{ body: { type: 'object', properties: { completed: { type: 'boolean' } }, required: ['completed'] } }`.
-4. **Params schema**: `todoParamsSchema` validates `{ params: { type: 'object', properties: { id: { type: 'number' } }, required: ['id'] } }`.
+4. **Params schema**: `todoParamsSchema` validates `{ params: { type: 'object', properties: { id: { type: 'integer', minimum: 1 } }, required: ['id'] } }`.
 5. **Routes file**: `packages/backend/src/routes/todo-routes.ts` exports a Fastify plugin that registers CRUD routes.
 6. **GET /api/todos**: Calls `todoRepository.getAll()` and returns JSON array with status 200.
 7. **POST /api/todos**: Validates with `createTodoSchema`, sanitizes text, calls `todoRepository.create()`, returns created todo with status 201.
@@ -28,23 +28,23 @@ so that the frontend can perform all todo operations with proper error handling.
 
 ## Tasks / Subtasks
 
-- [ ] Define JSON Schemas (AC: 1-4)
-  - [ ] Add request schemas for create/update
-  - [ ] Add params schema for `:id`
-  - [ ] Add response schemas for Swagger (single todo, list, error, 404)
-- [ ] Implement todo routes plugin (AC: 5-9)
-  - [ ] Wire repository to route handlers via plugin options
-  - [ ] Implement GET/POST/PATCH/DELETE with correct status codes
-  - [ ] Add sanitization step for todo text before create
-  - [ ] Return 404 for missing update/delete targets
-- [ ] Register routes in app (AC: 10-11)
-  - [ ] Instantiate `TodoRepository` with `app.db`
-  - [ ] Register routes with plugin options
-- [ ] Add integration tests (AC: 12-13)
-  - [ ] Use `app.inject()` with in-memory DB
-  - [ ] Cover CRUD happy paths and validation failures
-  - [ ] Verify sanitization behavior
-- [ ] Verify `pnpm --filter backend test` passes
+- [x] Define JSON Schemas (AC: 1-4)
+  - [x] Add request schemas for create/update
+  - [x] Add params schema for `:id`
+  - [x] Add response schemas for Swagger (single todo, list, error, 404)
+- [x] Implement todo routes plugin (AC: 5-9)
+  - [x] Wire repository to route handlers via plugin options
+  - [x] Implement GET/POST/PATCH/DELETE with correct status codes
+  - [x] Add sanitization step for todo text before create
+  - [x] Return 404 for missing update/delete targets
+- [x] Register routes in app (AC: 10-11)
+  - [x] Instantiate `TodoRepository` with `app.db`
+  - [x] Register routes with plugin options
+- [x] Add integration tests (AC: 12-13)
+  - [x] Use `app.inject()` with in-memory DB
+  - [x] Cover CRUD happy paths and validation failures
+  - [x] Verify sanitization behavior
+- [x] Verify `pnpm --filter backend test` passes
 
 ## Dev Notes
 
@@ -131,14 +131,28 @@ None
 
 ### Completion Notes List
 
-- Ultimate context engine analysis completed - comprehensive developer guide created
+- Added todo schemas, route plugin, and app registration with Swagger response schemas.
+- Added integration tests for CRUD, validation failures, and sanitization.
+- Review fixes: enforce positive integer id handling, return 404 for invalid ids, and add invalid-id tests.
+- Tests: `pnpm --filter backend test:run`, `pnpm test`.
 
 ### File List
 
-**To be created:**
+**Created:**
 - `packages/backend/src/schemas/todo-schemas.ts`
 - `packages/backend/src/routes/todo-routes.ts`
 - `packages/backend/src/routes/todo-routes.test.ts`
 
-**To be modified:**
+**Modified:**
 - `packages/backend/src/app.ts`
+- `_bmad-output/implementation-artifacts/sprint-status.yaml`
+- `_bmad-output/implementation-artifacts/2-2-create-todo-crud-api-endpoints-with-validation.md`
+
+## Senior Developer Review (AI)
+
+- 2026-02-17: Fixed invalid id handling (404), tightened id schema to integer >= 1, added invalid-id tests, and reran `pnpm --filter backend test:run`.
+
+## Change Log
+
+- 2026-02-17: Implemented todo schemas/routes, app registration, and tests; ran backend and workspace test suites.
+- 2026-02-17: Code review fixes for id validation and invalid-id coverage; reran backend tests.

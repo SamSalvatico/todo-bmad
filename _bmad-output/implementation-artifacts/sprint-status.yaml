@@ -54,7 +54,7 @@ development_status:
   # Epic 2: Core Todo Management System
   epic-2: in-progress
   2-1-implement-todo-repository-and-database-schema: done
-  2-2-create-todo-crud-api-endpoints-with-validation: backlog
+  2-2-create-todo-crud-api-endpoints-with-validation: done
   2-3-build-frontend-api-wrapper-and-type-definitions: backlog
   2-4-create-core-todo-ui-components: backlog
   2-5-implement-todo-state-management-with-use-todos-hook: backlog
