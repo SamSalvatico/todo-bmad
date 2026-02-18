@@ -42,13 +42,13 @@ export function useTodos(): UseTodosReturn {
   const handleCreateTodo = async (text: string): Promise<ApiResult<Todo>> => {
     // Validate input
     if (!text?.trim()) {
-      return { data: null, error: 'Todo text cannot be empty' };
+      return { data: null, error: 'text must not be empty' };
     }
     const result = await api.createTodo(text);
     if (result.error) {
       setError(result.error);
     } else if (result.data) {
-      setTodos((prev) => [...prev, result.data!]);
+      setTodos((prev) => [...prev, result.data]);
       setError(null);
     }
     return result;
@@ -59,7 +59,7 @@ export function useTodos(): UseTodosReturn {
     if (result.error) {
       setError(result.error);
     } else if (result.data) {
-      setTodos((prev) => prev.map((todo) => (todo.id === id ? result.data! : todo)));
+      setTodos((prev) => prev.map((todo) => (todo.id === id ? result.data : todo)));
       setError(null);
     }
     return result;

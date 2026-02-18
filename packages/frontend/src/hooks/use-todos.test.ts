@@ -83,7 +83,7 @@ describe('useTodos hook', () => {
       createResult = await result.current.createTodo('');
     });
 
-    expect(createResult?.error).toBe('Todo text cannot be empty');
+    expect(createResult?.error).toBe('text must not be empty');
     expect(result.current.todos).toEqual([mockTodo1]);
     expect(api.createTodo).not.toHaveBeenCalled();
   });
@@ -105,7 +105,7 @@ describe('useTodos hook', () => {
       createResult = await result.current.createTodo('   ');
     });
 
-    expect(createResult?.error).toBe('Todo text cannot be empty');
+    expect(createResult?.error).toBe('text must not be empty');
     expect(api.createTodo).not.toHaveBeenCalled();
   });
 
@@ -368,5 +368,25 @@ describe('useTodos hook', () => {
     });
 
     expect(result.current.todos).toEqual([mockTodo1]);
+  });
+
+  // AC 2: clearError() functionality
+  it('should clear error when clearError is called', async () => {
+    vi.mocked(api.getTodos).mockResolvedValue({
+      data: null,
+      error: 'Network error',
+    });
+
+    const { result } = renderHook(() => useTodos());
+
+    await waitFor(() => {
+      expect(result.current.error).toBe('Network error');
+    });
+
+    await act(async () => {
+      result.current.clearError();
+    });
+
+    expect(result.current.error).toBeNull();
   });
 });
