@@ -44,3 +44,4 @@ coverage/
 .cache/
 
 packages/backend/tsconfig.tsbuildinfo
+packages/frontend/playwright-report/index.html
