@@ -53,10 +53,7 @@ export function useTodos(): UseTodosReturn {
     return result;
   };
 
-  const handleUpdateTodo = async (
-    id: number,
-    completed: boolean
-  ): Promise<ApiResult<Todo>> => {
+  const handleUpdateTodo = async (id: number, completed: boolean): Promise<ApiResult<Todo>> => {
     const result = await api.updateTodo(id, completed);
     if (result.error) {
       setError(result.error);

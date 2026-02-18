@@ -8,8 +8,7 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "vitest",
-    "test:run": "vitest --run"
+    "test": "vitest --run"
   },
   "dependencies": {
     "@fastify/cors": "^10.0.1",

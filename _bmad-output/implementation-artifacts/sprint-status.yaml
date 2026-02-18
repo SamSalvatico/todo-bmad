@@ -52,13 +52,13 @@ development_status:
   epic-1-retrospective: optional
 
   # Epic 2: Core Todo Management System
-  epic-2: in-progress
+  epic-2: done
   2-1-implement-todo-repository-and-database-schema: done
   2-2-create-todo-crud-api-endpoints-with-validation: done
   2-3-build-frontend-api-wrapper-and-type-definitions: done
   2-4-create-core-todo-ui-components: done
   2-5-implement-todo-state-management-with-use-todos-hook: done
-  2-6-integrate-complete-todo-workflow-create-view-complete-delete: backlog
+  2-6-integrate-complete-todo-workflow-create-view-complete-delete: done
   epic-2-retrospective: optional
 
   # Epic 3: UI Polish, States & Accessibility

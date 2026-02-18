@@ -23,9 +23,7 @@ describe('TodoList', () => {
     const onToggle = vi.fn();
     const onDelete = vi.fn();
 
-    const { container } = render(
-      <TodoList todos={[]} onToggle={onToggle} onDelete={onDelete} />
-    );
+    const { container } = render(<TodoList todos={[]} onToggle={onToggle} onDelete={onDelete} />);
 
     const list = container.querySelector('ul');
     if (list) {
@@ -37,9 +35,7 @@ describe('TodoList', () => {
     const onToggle = vi.fn();
     const onDelete = vi.fn();
 
-    render(
-      <TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />);
 
     expect(screen.getByText('First todo')).toBeInTheDocument();
     expect(screen.getByText('Second todo')).toBeInTheDocument();
@@ -49,9 +45,7 @@ describe('TodoList', () => {
     const onToggle = vi.fn();
     const onDelete = vi.fn();
 
-    render(
-      <TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />);
 
     const checkboxes = screen.getAllByRole('checkbox');
     expect(checkboxes).toHaveLength(2);
@@ -62,7 +56,7 @@ describe('TodoList', () => {
     const onDelete = vi.fn();
 
     const { container } = render(
-      <TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />
+      <TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />,
     );
 
     const list = container.querySelector('ul');
@@ -77,9 +71,7 @@ describe('TodoList', () => {
     const onToggle = vi.fn();
     const onDelete = vi.fn();
 
-    render(
-      <TodoList todos={[]} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoList todos={[]} onToggle={onToggle} onDelete={onDelete} />);
 
     expect(screen.getByText(/No todos yet/i)).toBeInTheDocument();
   });
@@ -89,7 +81,7 @@ describe('TodoList', () => {
     const onDelete = vi.fn();
 
     const { container } = render(
-      <TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />
+      <TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />,
     );
 
     const list = container.querySelector('ul');
@@ -102,10 +94,17 @@ describe('TodoList', () => {
     const onDelete = vi.fn();
 
     const { container } = render(
-      <TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />
+      <TodoList todos={mockTodos} onToggle={onToggle} onDelete={onDelete} />,
     );
 
     const list = container.querySelector('ul');
-    expect(list).toHaveClass('space-y-0', 'border', 'border-gray-200', 'rounded-lg', 'overflow-hidden', 'shadow-sm');
+    expect(list).toHaveClass(
+      'space-y-0',
+      'border',
+      'border-gray-200',
+      'rounded-lg',
+      'overflow-hidden',
+      'shadow-sm',
+    );
   });
 });

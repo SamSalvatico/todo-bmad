@@ -25,9 +25,7 @@ describe('TodoRepository', () => {
   });
 
   it('returns all todos ordered by created_at desc', () => {
-    const insert = db.prepare(
-      'INSERT INTO todos (text, completed, created_at) VALUES (?, ?, ?)',
-    );
+    const insert = db.prepare('INSERT INTO todos (text, completed, created_at) VALUES (?, ?, ?)');
 
     insert.run('First', 0, '2026-02-16T08:00:00Z');
     insert.run('Second', 1, '2026-02-17T08:00:00Z');

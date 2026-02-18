@@ -82,7 +82,11 @@ export async function createApp(): Promise<FastifyInstance> {
 
     // Redirect non-API routes to index.html for SPA routing
     app.setNotFoundHandler(async (request, reply) => {
-      if (!request.url.startsWith('/api') && !request.url.startsWith('/docs') && !request.url.startsWith('/health')) {
+      if (
+        !request.url.startsWith('/api') &&
+        !request.url.startsWith('/docs') &&
+        !request.url.startsWith('/health')
+      ) {
         return reply.sendFile('index.html');
       }
       return reply.status(404).send({ error: 'Not Found' });

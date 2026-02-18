@@ -33,7 +33,11 @@ describe('Todo routes', () => {
     });
 
     expect(createResponse.statusCode).toBe(201);
-    const created = JSON.parse(createResponse.payload) as { id: number; text: string; completed: boolean };
+    const created = JSON.parse(createResponse.payload) as {
+      id: number;
+      text: string;
+      completed: boolean;
+    };
     expect(created.text).toBe('Test todo');
     expect(created.completed).toBe(false);
     expect(typeof created.id).toBe('number');
@@ -142,7 +146,11 @@ describe('Todo routes', () => {
     });
 
     expect(response.statusCode).toBe(400);
-    const errorBody = JSON.parse(response.payload) as { statusCode: number; error: string; message: string };
+    const errorBody = JSON.parse(response.payload) as {
+      statusCode: number;
+      error: string;
+      message: string;
+    };
     expect(errorBody.statusCode).toBe(400);
     expect(errorBody.error).toBe('Bad Request');
     expect(typeof errorBody.message).toBe('string');

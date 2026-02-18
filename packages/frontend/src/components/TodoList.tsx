@@ -18,14 +18,12 @@ export const TodoList: FC<TodoListProps> = ({ todos, onToggle, onDelete }) => {
   }
 
   return (
-    <ul className="space-y-0 border border-gray-200 rounded-lg overflow-hidden shadow-sm" aria-label="Todo list">
+    <ul
+      className="space-y-0 border border-gray-200 rounded-lg overflow-hidden shadow-sm"
+      aria-label="Todo list"
+    >
       {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onToggle={onToggle}
-          onDelete={onDelete}
-        />
+        <TodoItem key={todo.id} todo={todo} onToggle={onToggle} onDelete={onDelete} />
       ))}
     </ul>
   );

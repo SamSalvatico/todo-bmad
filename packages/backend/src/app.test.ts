@@ -31,7 +31,7 @@ describe('App Configuration', () => {
       method: 'GET',
       url: '/health',
     });
-    
+
     expect(response.statusCode).toBe(200);
     const body = JSON.parse(response.payload);
     expect(body.status).toBe('ok');
@@ -51,11 +51,11 @@ describe('App Configuration', () => {
 
     it('should register static plugin in production', async () => {
       app = await createApp();
-      
+
       // In production, the app should have static plugin registered
       // We can verify this by checking if the setNotFoundHandler was called
       expect(app.config.NODE_ENV).toBe('production');
-      
+
       // The app should be properly configured
       expect(app).toBeDefined();
     });
@@ -83,9 +83,9 @@ describe('App Configuration', () => {
     it('should close database on app close', async () => {
       app = await createApp();
       const closeSpy = vi.spyOn(app.db, 'close');
-      
+
       await app.close();
-      
+
       expect(closeSpy).toHaveBeenCalled();
       closeSpy.mockRestore();
     });

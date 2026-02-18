@@ -16,9 +16,7 @@ describe('TodoItem', () => {
     const onToggle = vi.fn();
     const onDelete = vi.fn();
 
-    render(
-      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />);
 
     expect(screen.getByText('Test todo')).toBeInTheDocument();
   });
@@ -28,9 +26,7 @@ describe('TodoItem', () => {
     const onDelete = vi.fn();
     const user = userEvent.setup();
 
-    render(
-      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />);
 
     const checkbox = screen.getByRole('checkbox');
     await user.click(checkbox);
@@ -45,9 +41,7 @@ describe('TodoItem', () => {
 
     global.confirm = vi.fn(() => true);
 
-    render(
-      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />);
 
     const deleteButton = screen.getByRole('button', { name: /delete/i });
     await user.click(deleteButton);
@@ -63,9 +57,7 @@ describe('TodoItem', () => {
 
     global.confirm = vi.fn(() => false);
 
-    render(
-      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />);
 
     const deleteButton = screen.getByRole('button', { name: /delete/i });
     await user.click(deleteButton);
@@ -80,7 +72,7 @@ describe('TodoItem', () => {
     const completedTodo = { ...mockTodo, completed: true };
 
     const { container } = render(
-      <TodoItem todo={completedTodo} onToggle={onToggle} onDelete={onDelete} />
+      <TodoItem todo={completedTodo} onToggle={onToggle} onDelete={onDelete} />,
     );
 
     const textElement = screen.getByText('Test todo');
@@ -91,9 +83,7 @@ describe('TodoItem', () => {
     const onToggle = vi.fn();
     const onDelete = vi.fn();
 
-    render(
-      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />);
 
     const textElement = screen.getByText('Test todo');
     expect(textElement).not.toHaveClass('line-through');
@@ -104,9 +94,7 @@ describe('TodoItem', () => {
     const onDelete = vi.fn();
     const completedTodo = { ...mockTodo, completed: true };
 
-    render(
-      <TodoItem todo={completedTodo} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoItem todo={completedTodo} onToggle={onToggle} onDelete={onDelete} />);
 
     const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
     expect(checkbox.checked).toBe(true);
@@ -116,9 +104,7 @@ describe('TodoItem', () => {
     const onToggle = vi.fn();
     const onDelete = vi.fn();
 
-    render(
-      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />
-    );
+    render(<TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />);
 
     const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
     expect(checkbox.checked).toBe(false);
@@ -129,11 +115,18 @@ describe('TodoItem', () => {
     const onDelete = vi.fn();
 
     const { container } = render(
-      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />
+      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />,
     );
 
     const listItem = container.querySelector('li');
-    expect(listItem).toHaveClass('flex', 'items-center', 'gap-3', 'p-3', 'border-b', 'hover:bg-gray-50');
+    expect(listItem).toHaveClass(
+      'flex',
+      'items-center',
+      'gap-3',
+      'p-3',
+      'border-b',
+      'hover:bg-gray-50',
+    );
   });
 
   it('last item should not have bottom border via last:border-b-0', () => {
@@ -141,7 +134,7 @@ describe('TodoItem', () => {
     const onDelete = vi.fn();
 
     const { container } = render(
-      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />
+      <TodoItem todo={mockTodo} onToggle={onToggle} onDelete={onDelete} />,
     );
 
     const listItem = container.querySelector('li');

@@ -356,7 +356,7 @@ describe('useTodos hook', () => {
           setTimeout(() => {
             resolve({ data: [mockTodo1], error: null });
           }, 10);
-        })
+        }),
     );
 
     const { result } = renderHook(() => useTodos());

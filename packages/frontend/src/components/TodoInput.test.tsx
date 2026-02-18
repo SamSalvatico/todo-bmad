@@ -8,13 +8,18 @@ describe('TodoInput', () => {
     const onChange = vi.fn();
     const onSubmit = vi.fn();
 
-    render(
-      <TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />
-    );
+    render(<TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />);
 
     const input = screen.getByPlaceholderText('What needs to be done?');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveClass('px-4', 'py-2', 'border', 'border-gray-300', 'rounded-lg', 'focus:ring-blue-500');
+    expect(input).toHaveClass(
+      'px-4',
+      'py-2',
+      'border',
+      'border-gray-300',
+      'rounded-lg',
+      'focus:ring-blue-500',
+    );
   });
 
   it('calls onChange when input value changes', async () => {
@@ -22,9 +27,7 @@ describe('TodoInput', () => {
     const onSubmit = vi.fn();
     const user = userEvent.setup();
 
-    render(
-      <TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />
-    );
+    render(<TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />);
 
     const input = screen.getByPlaceholderText('What needs to be done?');
     await user.type(input, 'Test');
@@ -41,9 +44,7 @@ describe('TodoInput', () => {
     const onSubmit = vi.fn();
     const user = userEvent.setup();
 
-    render(
-      <TodoInput value="New todo" onChange={onChange} onSubmit={onSubmit} disabled={false} />
-    );
+    render(<TodoInput value="New todo" onChange={onChange} onSubmit={onSubmit} disabled={false} />);
 
     const input = screen.getByPlaceholderText('What needs to be done?');
     await user.click(input);
@@ -57,9 +58,7 @@ describe('TodoInput', () => {
     const onSubmit = vi.fn();
     const user = userEvent.setup();
 
-    render(
-      <TodoInput value="New todo" onChange={onChange} onSubmit={onSubmit} disabled={false} />
-    );
+    render(<TodoInput value="New todo" onChange={onChange} onSubmit={onSubmit} disabled={false} />);
 
     const button = screen.getByRole('button');
     await user.click(button);
@@ -71,9 +70,7 @@ describe('TodoInput', () => {
     const onChange = vi.fn();
     const onSubmit = vi.fn();
 
-    render(
-      <TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={true} />
-    );
+    render(<TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={true} />);
 
     const input = screen.getByPlaceholderText('What needs to be done?') as HTMLInputElement;
     const button = screen.getByRole('button') as HTMLButtonElement;
@@ -87,15 +84,13 @@ describe('TodoInput', () => {
     const onSubmit = vi.fn();
 
     const { rerender } = render(
-      <TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />
+      <TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />,
     );
 
     const button = screen.getByRole('button') as HTMLButtonElement;
     expect(button.disabled).toBe(true);
 
-    rerender(
-      <TodoInput value="Test" onChange={onChange} onSubmit={onSubmit} disabled={false} />
-    );
+    rerender(<TodoInput value="Test" onChange={onChange} onSubmit={onSubmit} disabled={false} />);
 
     expect(button.disabled).toBe(false);
   });
@@ -105,9 +100,7 @@ describe('TodoInput', () => {
     const onSubmit = vi.fn();
     const user = userEvent.setup();
 
-    render(
-      <TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />
-    );
+    render(<TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />);
 
     const input = screen.getByPlaceholderText('What needs to be done?');
     await user.click(input);
@@ -121,7 +114,13 @@ describe('TodoInput', () => {
     const onSubmit = vi.fn();
 
     render(
-      <TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} submitLabel="Create" />
+      <TodoInput
+        value=""
+        onChange={onChange}
+        onSubmit={onSubmit}
+        disabled={false}
+        submitLabel="Create"
+      />,
     );
 
     const button = screen.getByRole('button', { name: /create/i });
@@ -133,14 +132,14 @@ describe('TodoInput', () => {
     const onSubmit = vi.fn();
 
     const { rerender } = render(
-      <TodoInput value="Test value" onChange={onChange} onSubmit={onSubmit} disabled={false} />
+      <TodoInput value="Test value" onChange={onChange} onSubmit={onSubmit} disabled={false} />,
     );
 
     const input = screen.getByPlaceholderText('What needs to be done?') as HTMLInputElement;
     expect(input.value).toBe('Test value');
 
     rerender(
-      <TodoInput value="Updated value" onChange={onChange} onSubmit={onSubmit} disabled={false} />
+      <TodoInput value="Updated value" onChange={onChange} onSubmit={onSubmit} disabled={false} />,
     );
 
     expect(input.value).toBe('Updated value');
