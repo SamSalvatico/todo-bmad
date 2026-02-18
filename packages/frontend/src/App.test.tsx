@@ -1,16 +1,18 @@
-import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
 // Mock the hook before importing App
 vi.mock('./hooks/use-todos', () => ({
   useTodos: vi.fn(() => ({
-    todos: [],
+    todos: [{ id: 1, text: 'Test todo', completed: false }],
     loading: false,
     error: null,
     createTodo: vi.fn(),
     updateTodo: vi.fn(),
     deleteTodo: vi.fn(),
+    clearError: vi.fn(),
+    refetch: vi.fn(),
   })),
 }));
 
@@ -42,9 +44,9 @@ describe('App', () => {
     expect(input).toBeInTheDocument();
   });
 
-  it('renders the TodoList component when empty', () => {
+  it('renders the TodoList component with todos', () => {
     render(<App />);
-    const emptyMessage = screen.getByText(/no todos yet/i);
-    expect(emptyMessage).toBeInTheDocument();
+    const todoText = screen.getByText(/Test todo/i);
+    expect(todoText).toBeInTheDocument();
   });
 });

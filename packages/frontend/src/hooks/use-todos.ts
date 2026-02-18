@@ -10,6 +10,7 @@ export interface UseTodosReturn {
   updateTodo: (id: number, completed: boolean) => Promise<ApiResult<Todo>>;
   deleteTodo: (id: number) => Promise<ApiResult<void>>;
   refetch: () => Promise<void>;
+  clearError: () => void;
 }
 
 export function useTodos(): UseTodosReturn {
@@ -81,6 +82,10 @@ export function useTodos(): UseTodosReturn {
     await fetchTodos(controller);
   };
 
+  const handleClearError = () => {
+    setError(null);
+  };
+
   return {
     todos,
     loading,
@@ -89,5 +94,6 @@ export function useTodos(): UseTodosReturn {
     updateTodo: handleUpdateTodo,
     deleteTodo: handleDeleteTodo,
     refetch: handleRefetch,
+    clearError: handleClearError,
   };
 }
