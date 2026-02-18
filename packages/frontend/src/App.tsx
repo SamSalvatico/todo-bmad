@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { EmptyState } from './components/EmptyState';
 import { ErrorMessage } from './components/ErrorMessage';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { TodoInput } from './components/TodoInput';
@@ -47,20 +46,15 @@ function App() {
     }
   }, [shouldFocusInput]);
 
-  // Show loading spinner when loading and no todos yet
-  if (loading && !todos.length) {
+  // Show loading spinner when loading and no todos yet (initial load)
+  if (loading && !todos.length && !error) {
     return <LoadingSpinner message="Loading todos..." />;
   }
 
-  // Show empty state when no todos, no error, and not loading
-  if (todos.length === 0 && !error && !loading) {
-    return <EmptyState />;
-  }
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-slate-50 p-4">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-slate-50 px-4 sm:px-6 lg:px-8 py-4">
       <div className="w-full max-w-2xl">
-        <h1 className="mb-8 text-3xl font-bold text-slate-900">My Todos</h1>
+        <h1 className="mb-8 text-2xl sm:text-3xl font-bold text-slate-900">My Todos</h1>
 
         {/* AC 8: Error banner shown inline, doesn't hide input */}
         {error && <ErrorMessage message={error} onDismiss={handleDismissError} />}
@@ -73,6 +67,15 @@ function App() {
           disabled={loading}
         />
 
+        {/* Show empty state message when no todos and not loading */}
+        {todos.length === 0 && !loading && (
+          <div className="mt-8 text-center">
+            <div className="mb-4 text-4xl">📝</div>
+            <p className="text-gray-600 text-lg">No todos yet. Add one to get started!</p>
+          </div>
+        )}
+
+        {/* Show todo list when todos exist */}
         {todos.length > 0 && (
           <TodoList todos={todos} onToggle={handleToggleTodo} onDelete={handleDeleteTodo} />
         )}

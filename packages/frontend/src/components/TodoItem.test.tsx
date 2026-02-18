@@ -122,7 +122,7 @@ describe('TodoItem', () => {
     expect(listItem).toHaveClass(
       'flex',
       'items-center',
-      'gap-3',
+      'gap-4',
       'p-3',
       'border-b',
       'hover:bg-gray-50',

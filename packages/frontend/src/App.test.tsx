@@ -36,7 +36,7 @@ describe('App', () => {
   it('applies correct styling to the heading', () => {
     render(<App />);
     const heading = screen.getByText(/my todos/i);
-    expect(heading).toHaveClass('text-3xl', 'font-bold', 'text-slate-900');
+    expect(heading).toHaveClass('text-2xl', 'sm:text-3xl', 'font-bold', 'text-slate-900');
   });
 
   it('renders the TodoInput component', () => {
