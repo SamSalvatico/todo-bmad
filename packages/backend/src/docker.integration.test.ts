@@ -35,7 +35,10 @@ describe('Docker Configuration Integration Tests', () => {
       const dockerfilePath = path.join(__dirname, '../../../Dockerfile');
       const content = fs.readFileSync(dockerfilePath, 'utf-8');
 
-      // Verify production stage copies backend node_modules
+      // Verify production stage copies root pnpm store and backend workspace links
+      expect(content).toContain(
+        'COPY --from=builder /app/node_modules ./node_modules',
+      );
       expect(content).toContain(
         'COPY --from=builder /app/packages/backend/node_modules ./packages/backend/node_modules',
       );

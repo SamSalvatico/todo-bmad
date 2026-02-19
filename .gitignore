@@ -45,3 +45,4 @@ coverage/
 
 packages/backend/tsconfig.tsbuildinfo
 packages/frontend/playwright-report/index.html
+packages/frontend/bundle-analysis.html

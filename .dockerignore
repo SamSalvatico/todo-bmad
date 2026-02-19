@@ -1,0 +1,15 @@
+node_modules
+**/node_modules
+.git
+data
+_bmad
+_bmad-output
+docs
+coverage
+**/coverage
+packages/frontend/playwright-report
+packages/frontend/bundle-analysis.html
+*.md
+!README.md
+.env
+.env.*

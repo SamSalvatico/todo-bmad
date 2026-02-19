@@ -122,3 +122,58 @@ docker compose up --build
 ```
 
 The container exposes `http://localhost:3000` and uses `./data` for the SQLite volume (`DB_PATH=/app/data/todos.db`).
+
+## Performance
+
+### Bundle Sizes (Production Build)
+
+| Asset | Raw | Gzipped |
+| ----- | --- | ------- |
+| JavaScript | 200.70 KB | **63.24 KB** |
+| CSS | 13.79 KB | **3.63 KB** |
+| **Total** | **214.49 KB** | **66.87 KB** |
+
+All well within targets: JS < 150 KB gzipped ✅, CSS < 10 KB gzipped ✅
+
+### Lighthouse Scores
+
+| Category | Target | Notes |
+| -------- | ------ | ----- |
+| Performance | ≥ 90 | Verify via Chrome DevTools Lighthouse |
+| Accessibility | 100 | Maintained from Story 3.4 |
+| Best Practices | ≥ 90 | All meta tags and favicon in place |
+
+These are target scores based on the architecture's performance requirements. Run Lighthouse yourself in Chrome DevTools (Incognito mode) against the production build to verify — see [How to Run Lighthouse Locally](#how-to-run-lighthouse-locally) below.
+
+### Optimization Techniques
+
+- **Vite tree-shaking** — Rollup eliminates unused code automatically in production builds
+- **Tailwind CSS v4 automatic purging** — `@tailwindcss/vite` plugin includes only styles actually used in source
+- **React production build** — Vite compiles React in production mode with minification via esbuild
+- **No render-blocking resources** — `<script type="module">` defers JS loading by default
+- **Synchronous SQLite** — `better-sqlite3` avoids async overhead for sub-millisecond DB operations
+- **Minimal dependency footprint** — Only React + React-DOM in production (no routing, state, or UI libraries)
+
+### How to Analyze the Bundle
+
+```bash
+# Standard production build (shows sizes in output)
+pnpm --filter frontend build
+
+# Bundle visualization (opens interactive treemap)
+ANALYZE=true pnpm --filter frontend build
+# Opens bundle-analysis.html in your browser
+```
+
+### How to Run Lighthouse Locally
+
+```bash
+# Option 1: Docker
+docker compose up --build
+# Open Chrome DevTools → Lighthouse on http://localhost:3000
+
+# Option 2: Manual
+pnpm build
+NODE_ENV=production node packages/backend/dist/server.js
+# Open Chrome DevTools → Lighthouse on http://localhost:3000
+```
