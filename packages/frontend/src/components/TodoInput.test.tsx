@@ -22,6 +22,40 @@ describe('TodoInput', () => {
     );
   });
 
+  it('wraps input and button in a form element', () => {
+    const onChange = vi.fn();
+    const onSubmit = vi.fn();
+
+    const { container } = render(
+      <TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />,
+    );
+
+    const form = container.querySelector('form');
+    expect(form).toBeInTheDocument();
+    expect(form?.querySelector('input')).toBeInTheDocument();
+    expect(form?.querySelector('button[type="submit"]')).toBeInTheDocument();
+  });
+
+  it('submit button has type="submit"', () => {
+    const onChange = vi.fn();
+    const onSubmit = vi.fn();
+
+    render(<TodoInput value="Test" onChange={onChange} onSubmit={onSubmit} disabled={false} />);
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('type', 'submit');
+  });
+
+  it('input has aria-label "New todo"', () => {
+    const onChange = vi.fn();
+    const onSubmit = vi.fn();
+
+    render(<TodoInput value="" onChange={onChange} onSubmit={onSubmit} disabled={false} />);
+
+    const input = screen.getByLabelText('New todo');
+    expect(input).toBeInTheDocument();
+  });
+
   it('calls onChange when input value changes', async () => {
     const onChange = vi.fn();
     const onSubmit = vi.fn();
@@ -39,7 +73,7 @@ describe('TodoInput', () => {
     expect(onChange).toHaveBeenCalledWith('t');
   });
 
-  it('calls onSubmit when Enter key is pressed', async () => {
+  it('calls onSubmit when Enter key is pressed via form submission', async () => {
     const onChange = vi.fn();
     const onSubmit = vi.fn();
     const user = userEvent.setup();

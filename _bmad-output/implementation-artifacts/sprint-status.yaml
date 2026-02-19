@@ -63,10 +63,10 @@ development_status:
 
   # Epic 3: UI Polish, States & Accessibility
   epic-3: in-progress
-  3-1-implement-ui-state-components-empty-loading-error: review
+  3-1-implement-ui-state-components-empty-loading-error: done
   3-2-add-comprehensive-error-handling-and-input-preservation: done
   3-3-implement-responsive-design-with-touch-support: done
-  3-4-add-full-keyboard-navigation-and-accessibility: backlog
+  3-4-add-full-keyboard-navigation-and-accessibility: done
   3-5-optimize-performance-bundle-size-fcp-tti-lighthouse: backlog
   3-6-create-comprehensive-e2e-test-suite-for-all-states: backlog
   epic-3-retrospective: optional

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ErrorMessage } from './components/ErrorMessage';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { TodoInput } from './components/TodoInput';
@@ -10,6 +10,9 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [shouldFocusInput, setShouldFocusInput] = useState(false);
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  const [deletedIndex, setDeletedIndex] = useState<number | null>(null);
+  const prevTodosLengthRef = useRef(todos.length);
 
   const handleCreateTodo = async () => {
     const result = await createTodo(inputValue);
@@ -29,6 +32,8 @@ function App() {
   };
 
   const handleDeleteTodo = async (id: number) => {
+    const index = todos.findIndex((t) => t.id === id);
+    setDeletedIndex(index);
     await deleteTodo(id);
   };
 
@@ -38,6 +43,22 @@ function App() {
     setShouldFocusInput(true);
   };
 
+  // Focus management after todo deletion — runs after React commits DOM update
+  useEffect(() => {
+    if (deletedIndex !== null && todos.length < prevTodosLengthRef.current) {
+      const todoItems = document.querySelectorAll('ul[aria-label="Todo list"] li');
+      if (todoItems.length > 0) {
+        const nextIndex = Math.min(deletedIndex, todoItems.length - 1);
+        const checkbox = todoItems[nextIndex]?.querySelector('input[type="checkbox"]');
+        (checkbox as HTMLElement)?.focus();
+      } else {
+        inputRef.current?.focus();
+      }
+      setDeletedIndex(null);
+    }
+    prevTodosLengthRef.current = todos.length;
+  }, [todos.length, deletedIndex]);
+
   // AC 9: Effect to focus input when flag is set
   useEffect(() => {
     if (shouldFocusInput && inputRef.current) {
@@ -45,6 +66,17 @@ function App() {
       setShouldFocusInput(false);
     }
   }, [shouldFocusInput]);
+
+  // Focus input after initial load completes (loading spinner → main UI)
+  useEffect(() => {
+    if (!loading && !initialLoadComplete) {
+      setInitialLoadComplete(true);
+      // Use requestAnimationFrame to ensure DOM is ready after LoadingSpinner unmounts
+      requestAnimationFrame(() => {
+        inputRef.current?.focus();
+      });
+    }
+  }, [loading, initialLoadComplete]);
 
   // Show loading spinner when loading and no todos yet (initial load)
   if (loading && !todos.length && !error) {
@@ -69,10 +101,10 @@ function App() {
 
         {/* Show empty state message when no todos and not loading */}
         {todos.length === 0 && !loading && (
-          <div className="mt-8 text-center">
+          <output className="block mt-8 text-center">
             <div className="mb-4 text-4xl">📝</div>
             <p className="text-gray-600 text-lg">No todos yet. Add one to get started!</p>
-          </div>
+          </output>
         )}
 
         {/* Show todo list when todos exist */}

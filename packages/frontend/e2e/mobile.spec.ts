@@ -108,7 +108,7 @@ test.describe('Mobile Todo App', () => {
     // Verify todo is marked complete
     let classes = await span.getAttribute('class');
     expect(classes).toContain('line-through');
-    expect(classes).toContain('opacity-60');
+    expect(classes).toContain('text-gray-500');
 
     // Toggle back to uncompleted
     await Promise.all([
@@ -220,10 +220,9 @@ test.describe('Mobile Todo App', () => {
     // Wait for UI to reflect completed state, then verify
     await expect(todoText).toHaveClass(/line-through/);
 
-    // Verify completed todo has both line-through and reduced opacity
+    // Verify completed todo has line-through styling
     const classes = await todoText.getAttribute('class');
     expect(classes).toContain('line-through');
-    expect(classes).toContain('opacity-60');
     
     // Verify color class changed from gray-900 to gray-500
     expect(classes).toContain('text-gray-500');

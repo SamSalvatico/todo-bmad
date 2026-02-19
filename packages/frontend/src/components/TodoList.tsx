@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Todo } from '../types/todo';
+import type { FC } from 'react';
+import type { Todo } from '../types/todo';
 import { TodoItem } from './TodoItem';
 
 export interface TodoListProps {
