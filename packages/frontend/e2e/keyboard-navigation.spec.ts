@@ -11,8 +11,11 @@ test.describe('Keyboard Navigation', () => {
   });
 
   test('input has focus on page load', async ({ page }) => {
-    const input = page.locator('input[aria-label="New todo"]');
-    await expect(input).toBeFocused();
+    // In headless Chromium, document.hasFocus() can be false, so check activeElement directly
+    await expect(async () => {
+      const ariaLabel = await page.evaluate(() => document.activeElement?.getAttribute('aria-label'));
+      expect(ariaLabel).toBe('New todo');
+    }).toPass({ timeout: 5000 });
   });
 
   test('Tab moves through interactive elements in correct order', async ({ page }) => {

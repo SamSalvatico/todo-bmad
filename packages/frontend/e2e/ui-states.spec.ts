@@ -20,18 +20,18 @@ test.describe('UI States', () => {
   });
 
   test('EmptyState shows when no todos exist', async ({ page }) => {
+    // Intercept API to return empty list
+    await page.route('**/api/todos', (route) => {
+      if (route.request().method() === 'GET') {
+        return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify([]) });
+      }
+      return route.continue();
+    });
+
     await page.goto('/');
     await page.waitForLoadState('networkidle');
 
-    // Clean up any existing todos
-    let existingTodos = page.locator('ul[aria-label="Todo list"] li');
-    while (await existingTodos.count() > 0) {
-      page.once('dialog', (dialog) => void dialog.accept());
-      await existingTodos.first().locator('button:has-text("Delete")').click();
-      await page.waitForTimeout(300);
-    }
-
-    // Verify EmptyState with implicit role="status" (<output> element)
+    // Verify EmptyState is visible
     const emptyState = page.locator('output:has-text("No todos yet")');
     await expect(emptyState).toBeVisible();
   });
